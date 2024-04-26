@@ -58,54 +58,34 @@ public class Airport {
         return experimentalPlanes;
     }
 
-    // Метод для сортировки самолетов по максимальной дальности полета
     public Airport sortByMaxDistance() {
-        Collections.sort(planes, new Comparator<Plane>() {
-            public int compare(Plane o1, Plane o2) {
-                return o1.Get_Max_Flight_Distance() - o2.Get_Max_Flight_Distance();
-            }
-        });
+        Collections.sort(planes, Comparator.comparingInt(Plane::Get_Max_Flight_Distance));
         return this;
     }
 
-    // Метод для сортировки самолетов по максимальной скорости
     public Airport sortByMaxSpeed() {
-        Collections.sort(planes, new Comparator<Plane>() {
-            public int compare(Plane o1, Plane o2) {
-                return o1.getMS() - o2.getMS();
-            }
-        });
+        Collections.sort(planes, Comparator.comparingInt(Plane::getMS));
         return this;
     }
 
-    // Метод для сортировки самолетов по максимальной грузоподъемности
     public Airport sortByMaxLoadCapacity() {
-        Collections.sort(planes, new Comparator<Plane>() {
-            public int compare(Plane o1, Plane o2) {
-                return o1.getMinLoadCapacity() - o2.getMinLoadCapacity();
-            }
-        });
+        Collections.sort(planes, Comparator.comparingInt(Plane::getMinLoadCapacity));
         return this;
     }
 
-    // Метод для вывода списка самолетов в консоль
     private void print(Collection<? extends Plane> collection) {
-        Iterator<? extends Plane> iterator = collection.iterator();
-        while (iterator.hasNext()) {
-            Plane plane = iterator.next();
+        for (Plane plane : collection) {
             System.out.println(plane);
         }
     }
 
-    // Переопределенный метод toString
     @Override
     public String toString() {
         return "Airport{" +
-                "Planes=" + planes.toString() +
+                "Planes=" + planes +
                 '}';
     }
 
-    // Геттер для списка самолетов
     public List<? extends Plane> getPlanes() {
         return planes;
     }
